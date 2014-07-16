@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{:L('ACTIONLOGIN')}</title>
+    <title>Register</title>
 
     <!-- Bootstrap core CSS -->
     <link href="__PUBLIC__/css/bootstrap.min.css" rel="stylesheet">
@@ -18,28 +18,91 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    
-    
-    
+    <style type="text/css" media="screen,print">
+        body {
+          padding-top: 60px;
+          padding-bottom: 40px;
+          background-color: #eee;
+        }
+    </style>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    	
+    <script language="JavaScript" type="text/javascript">
+    //<![CDATA[
+		$(document).ready(function(){
+            
+        });
+        
+        function toSubmit(){
+        	var msg = new Array();
+        	var name = $("#name").val();
+        	if(!name){
+        		msg.push("The user name can not be blank!");
+        	}
+        	
+        	var password = $("#password").val();
+        	if(!password){
+        		msg.push("The password can not be blank!");
+        	}
+        	
+        	var cpassword = $("#cpassword").val();
+        	if(password != cpassword){
+        		msg.push("The password and confirmed password does not match!");
+        	}
+        	
+        	if(msg.length > 0){
+        		var h = "<ul>";
+        		for(var i=0;i<msg.length ;i++){
+        			h += '<li>' + msg[i] + '</li>';
+        		}
+        		h += '</ul>';
+        		$("#msg").html(h);
+        		$("#msg").show();
+        	}else{
+        		$("form").submit();
+        	}
+        	
+        }
+        
+	//]]>
+   </script>
   </head>
 
   <body>
 
     <div class="container">
-
-      <form role="form" action="{:U('Admin/Auth/Save_register')}">
-          <div class="form-group">
-            <label for="name">User Name</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Enter email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-          </div>
-
-          <button type="submit" class="btn btn-default">Submit</button>
-          <a class="btn btn-default" href="{:U('Index/index')}">Cancel</a>
-        </form>
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="alert alert-danger" role="alert" id="msg" style="display: none;"></div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Register Form</div>
+  					<div class="panel-body">
+				        <form role="form" action="{:U('Admin/Auth/Save_register')}" role="form">
+				          <div class="form-group">
+				            <label for="name">User Name</label>
+				            <input type="text" class="form-control" id="name" name="name" placeholder="Enter user name">
+				          </div>
+				          <div class="form-group">
+				            <label for="password">Password</label>
+				            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+				          </div>
+						  <div class="form-group">
+				            <label for="cpassword">Confirmed Password</label>
+				            <input type="password" class="form-control" id="cpassword" placeholder="Confirmed Password">
+				          </div>
+				          <div class="form-group">
+				            <label for="name">E-mail</label>
+				            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
+				          </div>
+				          <button type="button" class="btn btn-primary" onclick="toSubmit()">Submit</button>
+				          <a class="btn btn-default" href="{:U('Index/index')}">Cancel</a>
+				        </form>
+			      	</div>
+  		       </div>
+		        
+		        
+			</div>
+		</div>
 
     </div> <!-- /container -->
   </body>
