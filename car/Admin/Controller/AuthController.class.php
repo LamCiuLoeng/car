@@ -62,6 +62,7 @@ class AuthController extends Controller {
         }
         
         #save user
+        $map['email'] = I('email',NULL);
         $datetime = new \DateTime();
         $map['create_time'] = $datetime->format('Y\-m\-d\ h:i:s');
         $map['update_time'] = $datetime->format('Y\-m\-d\ h:i:s');
