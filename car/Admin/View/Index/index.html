@@ -2,7 +2,14 @@
 
 <block name="content">
 <h1 class="page-header">Welcome!</h1>
-
-
-
+<p>User Name : {$user.name}</p>
+<p>User Code : {$user.code}</p>
+<p>E-mail : {$user.email}</p>
+<p>Address : 
+	<if condition="$user.address eq 'HK'">
+		Times Square Causeway Bay, Hong Kong
+	<elseif  condition="$user.address eq 'CN'"/>
+		Futian Central District,Shenzhen, China
+	</if>	
+</p>
 </block>

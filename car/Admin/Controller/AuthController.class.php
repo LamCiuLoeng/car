@@ -22,6 +22,7 @@ class AuthController extends Controller {
             $this->error('Wrong user name or password!',U('login'));
         }else{
             session('login','YES');
+			session('userid',$user['id']);
             $this->redirect('Index/index',NULL,0);
         }
         
@@ -61,6 +62,11 @@ class AuthController extends Controller {
             $this->error('Password can not be blank!',U('register'));
         }
         
+		$map['address'] = I('address',NULL);
+		if(!is_null($map['address'])){
+			$map['code'] = $map['address'].$this->gen_code();
+		}
+		
         #save user
         $datetime = new \DateTime();
         $map['create_time'] = $datetime->format('Y\-m\-d\ h:i:s');
@@ -71,5 +77,14 @@ class AuthController extends Controller {
         $User->data($map)->add();
         $this->success('Save the user successfully!',U('login'),2);
     }
+
+	private function gen_code()
+	{
+		$k = '';
+		for($i=0;$i<6;$i++){
+			$k = $k.chr(rand(65,90));
+		}
+		return $k;
+	}
     
 }
